@@ -5,7 +5,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App.jsx";
 import ContextApi from "./contextApi.jsx";
 import "./index.css";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ContextApi>
@@ -15,8 +16,13 @@ createRoot(document.getElementById("root")).render(
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
+          cacheLocation="localstorage"   
+        useRefreshTokens={true} 
     >
+      <QueryClientProvider client={queryClient}>
+
         <App />
+      </QueryClientProvider>
       </Auth0Provider>
     </ContextApi>
   </BrowserRouter>

@@ -2,20 +2,30 @@ import React, { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+
 import { AuthContext } from "./contextApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
-  const { userExist } = useContext(AuthContext);
+  const { userExist, loading } = useContext(AuthContext);
   const { isAuthenticated, isLoading } = useAuth0();
 
+  // ✅ Combine both local (context) and Auth0 states
   const userAuthenticated = isAuthenticated || userExist;
 
-  if (isLoading) return <p>Loading...</p>;
+  // ⏳ Wait until both systems finish loading
+  if (isLoading || loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -32,12 +42,12 @@ const App = () => {
           justifyContent: "center",
         }}
       />
+
       <Navbar />
+
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
-
-        {/* Protected route */}
         <Route
           path="/dashboard"
           element={
