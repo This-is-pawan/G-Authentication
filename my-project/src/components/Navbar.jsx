@@ -16,7 +16,7 @@ const Navbar = () => {
     e.preventDefault();
     try {
       const result = await axios.post(
-        'http://localhost:4000/api/logout',
+        'https://g-authentication.onrender.com/api/logout',
         {},
         { withCredentials: true }
       );
