@@ -65,7 +65,7 @@ const Navbar = () => {
         </p>
         </div>
       ) : (
-        // Guest User
+     
         <div className="flex items-center gap-2">
           <p className="w-10 h-10 rounded-full bg-gray-300 text-black text-center leading-[2.5rem] font-bold">
             🤖
