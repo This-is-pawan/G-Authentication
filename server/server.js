@@ -11,7 +11,7 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-  origin:'http://localhost:5175',
+  origin:'https://g-authentication-frontend.onrender.com',
 credentials:true,
 }))
 app.use('/api',route);
