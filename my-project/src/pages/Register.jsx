@@ -217,19 +217,20 @@ import { AuthContext } from "../contextApi";
 import LoginButton from "./LoginButton";
 
 const Register = () => {
-  const { isAuth, setIsAuth, handleUserExist } = useContext(AuthContext);
+  const { setIsAuth, handleUserExist } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [pass, setPass] = useState(true);
   const [formMode, setFormMode] = useState("register");
   const [name, setName] = useState("peter");
   const [email, setEmail] = useState("peter@gmail.com");
   const [password, setPassword] = useState("peter123#");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // ✅ REGISTER
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading("loading");
+    setLoading(true);
 
     try {
       const { data } = await axios.post(
@@ -240,23 +241,23 @@ const Register = () => {
 
       if (data.success) {
         toast.success(data.message || "Registered successfully!");
-        await handleUserExist(); // ✅ wait until user fetched
+        await handleUserExist(); // wait for user session update
         setIsAuth(true);
         setFormMode("login");
       } else {
-        toast.error(data.message || "Register failed");
+        toast.error(data.message || "Registration failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || error.message);
     } finally {
-      setLoading("");
+      setLoading(false);
     }
   };
 
   // ✅ LOGIN
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading("loading");
+    setLoading(true);
 
     try {
       const { data } = await axios.post(
@@ -267,16 +268,16 @@ const Register = () => {
 
       if (data.success) {
         toast.success(data.message || "Login successful!");
-        await handleUserExist(); // ✅ wait until user fetched
+        await handleUserExist(); // wait for session setup
         setIsAuth(true);
-        navigate("/"); // 👈 stays on home (Dashboard button visible)
+        navigate("/dashboard"); // redirect to dashboard ✅
       } else {
         toast.error(data.message || "Login failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || error.message);
     } finally {
-      setLoading("");
+      setLoading(false);
     }
   };
 
@@ -314,16 +315,13 @@ const Register = () => {
 
             <button
               type="submit"
-              className="p-3 bg-gray-950 text-white rounded-full mt-5 hover:bg-gray-700 cursor-pointer border-2 flex justify-center items-center"
+              disabled={loading}
+              className="p-3 bg-gray-950 text-white rounded-full mt-5 hover:bg-gray-700 border-2 flex justify-center items-center"
             >
-              {loading === "loading" ? (
-                <LuLoader className="animate-spin" />
-              ) : (
-                <span>Login</span>
-              )}
+              {loading ? <LuLoader className="animate-spin" /> : <span>Login</span>}
             </button>
 
-            <p className="text-center capitalize font-bold">OR</p>
+            <p className="text-center capitalize font-bold mt-2">OR</p>
 
             <p className="text-center m-3">
               Don’t have an account?
@@ -372,13 +370,10 @@ const Register = () => {
 
             <button
               type="submit"
-              className="p-3 bg-gray-950 text-white rounded-full mt-5 hover:bg-gray-700 cursor-pointer border-2 flex justify-center items-center"
+              disabled={loading}
+              className="p-3 bg-gray-950 text-white rounded-full mt-5 hover:bg-gray-700 border-2 flex justify-center items-center"
             >
-              {loading === "loading" ? (
-                <LuLoader className="animate-spin" />
-              ) : (
-                <span>Register</span>
-              )}
+              {loading ? <LuLoader className="animate-spin" /> : <span>Register</span>}
             </button>
 
             <p className="text-center m-3">
@@ -394,7 +389,8 @@ const Register = () => {
         )}
       </form>
 
-      <div className="flex items-center justify-center relative">
+      {/* Social login section */}
+      <div className="flex items-center justify-center relative mt-5">
         <FcGoogle className="absolute top-10 left-16" />
         <FaGithub className="absolute top-10 left-10" />
         <FaFacebook className="text-blue-700 absolute top-10 left-3" />
@@ -405,3 +401,4 @@ const Register = () => {
 };
 
 export default Register;
+
