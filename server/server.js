@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 //  Cookie parser must have a secret (important for signed cookies)
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser());
 
 //  CORS setup with correct options
 app.use(
