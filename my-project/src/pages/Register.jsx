@@ -27,7 +27,7 @@ const Register = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/register",
+        "https://g-authentication.onrender.com/api/register",
         { name, email, password },
         { withCredentials: true }
       );
@@ -54,7 +54,7 @@ const Register = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/login",
+        "https://g-authentication.onrender.com/api/login",
         { email, password },
         { withCredentials: true }
       );
