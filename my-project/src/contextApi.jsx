@@ -61,7 +61,7 @@ const ContextApi = ({ children }) => {
       const res = await axios.get("https://g-authentication.onrender.com/api/user", {
         withCredentials: true,
       });
-      console.log(res)
+      // console.log(res)
 
       if (res?.data) {
         setExistUser(res.data);
