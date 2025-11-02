@@ -182,30 +182,34 @@ const ContextApi = ({ children }) => {
     document.body.classList.toggle("dark-theme", isDarkTheme);
   }, [isDarkTheme]);
 
-  // ✅ Verify user session from backend on app load
-  const handleUserExist = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get("https://g-authentication.onrender.com/api/user", {
-        withCredentials: true,
-      });
+ // ✅ Verify user session from backend on app load
+const handleUserExist = async () => {
+  try {
+    setLoading(true);
+    const res = await axios.get("https://g-authentication.onrender.com/api/user", {
+      withCredentials: true,
+    });
 
-      if (res?.data) {
-        setExistUser(res.data);
-        setIsAuth(true);
-        localStorage.setItem("userExist", JSON.stringify(res.data));
-      } else {
-        throw new Error("No active session");
-      }
-    } catch (err) {
-      console.warn("Session expired or user not logged in:", err.message);
+    if (res?.data?.success && res?.data?.user) {
+      setExistUser(res.data.user);
+      setIsAuth(true);
+      localStorage.setItem("userExist", JSON.stringify(res.data.user));
+    } else {
+      throw new Error("No active session");
+    }
+  } catch (err) {
+    console.warn("Session expired or user not logged in:", err.message);
+
+    if (err.response?.status === 401) {
       setIsAuth(false);
       setExistUser(null);
       localStorage.removeItem("userExist");
-    } finally {
-      setLoading(false);
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // 🧩 Run once when app starts
   useEffect(() => {
