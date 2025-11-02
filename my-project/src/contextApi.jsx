@@ -20,7 +20,19 @@ const ContextApi = ({ children }) => {
   const [isDarkTheme, setDarkTheme] = useState(getInitialDarkMode());
 
   //  Search and history state
-  const [searchTheme, setSearchTheme] = useState("dog");
+  const [searchThemes, setSearchThemes] = useState([
+  "dog",
+  "cat",
+  "nature",
+  "technology",
+  "travel",
+  "food",
+  "music",
+  "sports",
+  "fashion",
+  "space",
+]);
+
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem("searchHistory")) || []
   );
