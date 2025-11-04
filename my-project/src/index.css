@@ -2,20 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 /* Light mode (default) */
 body {
-  background-color: #ffffff;
-  color: #222222;
+  background-color: #ffffff !important;
+  color: #222222 !important;
   transition: background-color 0.3s, color 0.3s;
 }
 
 /* Dark mode */
 body.dark-theme {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #121212 !important;
+  color: #ffffff !important;
 }
 
-/* Example for navbar if you have one */
+/* Navbar example */
 .navbar {
   background-color: #f2f2f2;
   transition: background-color 0.3s;
