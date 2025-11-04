@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Home = () => {
-  const { userExist } = useContext(AuthContext);
+  const { userExist,searchTheme } = useContext(AuthContext);
   const { isAuthenticated, isLoading, error, user } = useAuth0();
   const navigate = useNavigate();
 
