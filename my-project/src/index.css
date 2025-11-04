@@ -1,8 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.dark-theme {
-  background: #fff;
-  color: rgb(50, 6, 6);
 
+/* Light mode (default) */
+body {
+  background-color: #ffffff;
+  color: #222222;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode */
+body.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Example for navbar if you have one */
+.navbar {
+  background-color: #f2f2f2;
+  transition: background-color 0.3s;
+}
+
+body.dark-theme .navbar {
+  background-color: #1f1f1f;
 }
