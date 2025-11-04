@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Home = () => {
-  const { userExist,searchTheme } = useContext(AuthContext);
+  const { userExist, searchTheme, isDarkTheme } = useContext(AuthContext);
   const { isAuthenticated, isLoading, error, user } = useAuth0();
   const navigate = useNavigate();
 
@@ -36,19 +36,36 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white">
+    <div
+      className={`flex flex-col items-center justify-center min-h-screen px-6 text-center transition-all duration-500 ${
+        isDarkTheme
+          ? "bg-gray-900 text-white"
+          : "bg-pink-200 text-black"
+      }`}
+    >
       <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-        👋🏽 Hi, <span className="text-pink-300 mt-2">{userName}</span>
+        👋🏽 Hi,{" "}
+        <span className={`${isDarkTheme ? "text-pink-400" : "text-purple-600"} mt-2`}>
+          {userName}
+        </span>
       </h1>
 
-      <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-md">
+      <p
+        className={`text-sm sm:text-base md:text-lg max-w-md ${
+          isDarkTheme ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
         Welcome to our service! We’re glad to have you here.
       </p>
 
       <Link
         to="/dashboard"
         onClick={handleDashboardAccess}
-        className="mt-10 bg-white text-purple-500 capitalize py-3 px-10 rounded-full transition-all duration-300 hover:bg-purple-100"
+        className={`mt-10 capitalize py-3 px-10 rounded-full transition-all duration-300 ${
+          isDarkTheme
+            ? "bg-white text-purple-600 hover:bg-gray-100"
+            : "bg-purple-600 text-white hover:bg-purple-700"
+        }`}
       >
         Go to Dashboard ➜
       </Link>
