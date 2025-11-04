@@ -126,7 +126,8 @@ const Navbar = () => {
     userExist,
     setExistUser,
     isDarkTheme,
-    toggleDarkTheme,
+    toggleDarkTheme,searchTheme
+       
   } = useContext(AuthContext);
 
   const { isAuthenticated, isLoading, error, user } = useAuth0();
