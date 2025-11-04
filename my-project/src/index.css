@@ -2,31 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Light mode (default) */
+/* 🌞 Light mode (default) */
 body {
-  background-color: #ffffff !important;
-  color: #222222 !important;
-  transition: background-color 0.3s, color 0.3s;
+  background-color: #ffffff !important; /* white background */
+  color: #000000 !important;            /* black text */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Dark mode */
+/* 🌙 Dark mode */
 body.dark-theme {
-  background-color: #121212 !important;
-  color: #ffffff !important;
+  background-color: #000000 !important; /* black background */
+  color: #ffffff !important;            /* white text */
 }
 
-/* Navbar example */
+/* Navbar styles */
 .navbar {
-  background-color: #f2f2f2;
-  transition: background-color 0.3s;
+  background-color: #f8f8f8; /* light navbar */
+  color: #000000;            /* black text */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark-theme .navbar {
-  background-color: #1f1f1f;
+  background-color: #1f1f1f; /* dark navbar */
+  color: #ffffff;            /* white text */
 }
