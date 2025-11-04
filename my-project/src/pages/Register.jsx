@@ -13,7 +13,7 @@ import { AuthContext } from "../contextApi";
 import LoginButton from "./LoginButton";
 
 const Register = () => {
-  const { setIsAuth, handleUserExist } = useContext(AuthContext);
+  const { setIsAuth, handleUserExist,searchTheme } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [pass, setPass] = useState(true);
