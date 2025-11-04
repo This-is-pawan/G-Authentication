@@ -1,11 +1,8 @@
-
-// #################################
 import { MdWifiPassword } from "react-icons/md";
 import { LuLoader } from "react-icons/lu";
 import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa";
+import { FaFacebook, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +10,7 @@ import { AuthContext } from "../contextApi";
 import LoginButton from "./LoginButton";
 
 const Register = () => {
-  const { setIsAuth, handleUserExist,searchTheme } = useContext(AuthContext);
+  const { setIsAuth, handleUserExist, isDarkTheme } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [pass, setPass] = useState(true);
@@ -22,6 +19,10 @@ const Register = () => {
   const [email, setEmail] = useState("peter@gmail.com");
   const [password, setPassword] = useState("peter123#");
   const [loading, setLoading] = useState(false);
+
+  // ✅ Dynamic input style
+  const inputClass = `${isDarkTheme ? "bg-gray-900 text-white" : "bg-pink-200 text-black"} 
+                      rounded-xl p-2 border-none outline-none placeholder-gray-400`;
 
   // ✅ REGISTER
   const handleRegister = async (e) => {
@@ -37,10 +38,10 @@ const Register = () => {
 
       if (data.success) {
         toast.success(data.message || "Registered successfully!");
-        await handleUserExist(); // wait for user session update
+        await handleUserExist();
         setIsAuth(true);
         setFormMode("login");
-              navigate("/");
+        navigate("/");
       } else {
         toast.error(data.message || "Registration failed");
       }
@@ -65,9 +66,9 @@ const Register = () => {
 
       if (data.success) {
         toast.success(data.message || "Login successful!");
-        await handleUserExist(); // wait for session setup
+        await handleUserExist();
         setIsAuth(true);
-        navigate("/"); // redirect to dashboard ✅
+        navigate("/");
       } else {
         toast.error(data.message || "Login failed");
       }
@@ -79,7 +80,11 @@ const Register = () => {
   };
 
   return (
-    <div className="w-[90%] sm:w-[80%] md:w-[400px] mx-auto shadow-lg bg-white mt-16 p-5 rounded-lg">
+    <div
+      className={`w-[90%] sm:w-[80%] md:w-[400px] mx-auto shadow-lg mt-16 p-5 rounded-lg ${
+        isDarkTheme ? "bg-gray-800 text-white" : "bg-white text-black"
+      }`}
+    >
       <form
         className="grid gap-3 relative"
         onSubmit={formMode === "register" ? handleRegister : handleLogin}
@@ -89,7 +94,7 @@ const Register = () => {
             <label>Email</label>
             <input
               type="email"
-              className="bg-pink-50 rounded-xl p-2"
+              className={inputClass}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -98,7 +103,7 @@ const Register = () => {
             <label>Password</label>
             <input
               type={pass ? "password" : "text"}
-              className="bg-pink-50 rounded-xl p-2"
+              className={inputClass}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -135,7 +140,7 @@ const Register = () => {
             <label>Name</label>
             <input
               type="text"
-              className="bg-pink-50 rounded-xl p-2"
+              className={inputClass}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -144,7 +149,7 @@ const Register = () => {
             <label>Email</label>
             <input
               type="email"
-              className="bg-pink-50 rounded-xl p-2"
+              className={inputClass}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -153,7 +158,7 @@ const Register = () => {
             <label>Password</label>
             <input
               type={pass ? "password" : "text"}
-              className="bg-pink-50 rounded-xl p-2"
+              className={inputClass}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -198,4 +203,3 @@ const Register = () => {
 };
 
 export default Register;
-
