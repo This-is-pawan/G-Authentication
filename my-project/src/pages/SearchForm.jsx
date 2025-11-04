@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../contextApi';
 
 const SearchForm = () => {
-  const { setSearchTheme,addToHistory } = useContext(AuthContext);
+  const { setSearchTheme,addToHistory,searchTheme } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
