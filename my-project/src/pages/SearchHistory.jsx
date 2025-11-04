@@ -3,7 +3,7 @@ import { AuthContext } from "../contextApi";
 import { X, Clock, History } from "lucide-react";
 
 const SearchHistory = () => {
-  const { searchHistory, setSearchTheme, setSearchHistory } = useContext(AuthContext);
+  const { searchHistory, setSearchTheme, setSearchHistory,searchTheme } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
   // ✅ Load saved history from localStorage when component mounts
