@@ -57,7 +57,7 @@ const Navbar = () => {
       } p-3 flex items-center justify-around transition-colors duration-300`}
     >
       <h1 className="text-xl font-mono font-bold flex items-center gap-2">
-        <img src={img} alt="logo" className="w-8 h-8" onClick={()=>navigate(/)} />
+        <img src={img} alt="logo" className="w-8 h-8" onClick={()=>navigate("/")} />
         Go-Auth
       </h1>
 
